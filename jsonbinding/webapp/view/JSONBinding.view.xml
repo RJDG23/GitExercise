@@ -1,0 +1,68 @@
+<mvc:View controllerName="sapips.training.jsonbinding.controller.JSONBinding" xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+    <Page id="page" title="{i18n>title}">
+        <Panel id="panel1" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region"
+            headerText="Data Binding Basics">
+            <f:SimpleForm>
+                <f:content>
+                    <Label text="EID" labelFor="inputEID" />
+                    <Input value="{oAddressModel>/EID}" enabled="{/enabled}" />
+                    <Label text="Enabled" />
+                    <CheckBox selected="{oAddressModel>/enabled}" />
+                </f:content>
+            </f:SimpleForm>
+        </Panel>
+        <Panel id="panel2" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region"
+            headerText="Address Details">
+            <f:SimpleForm>
+                <f:content>
+                    <Label text="Address" labelFor="inputEID" />
+                    <Text text="{oAddressModel>/Address/Street} {oAddressModel>/Address/Zip} {oAddressModel>/Address/City} {oAddressModel>/Address/Country}"
+                        class="sapUiSmallMarginBottom" />
+                    <Link text="Send Email" press="formatMail" href="{ path: '/EID', 
+                                formatter: '.formatter.formatMail'}" />
+                    <Label text="Sales Amount" />
+                    <Input id="inputSalesAmount" maxLength="8" enabled="enabled"
+                        value="{ parts: [ {path: 'oAddressModel>/SalesAmount'}, {path: 'oAddressModel>/CurrencyCode'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+                        class="sapUiSmallMarginBegin" />
+                </f:content>
+            </f:SimpleForm>
+        </Panel>
+        <Panel id="panel3" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region"
+            headerText="Aggregation Binding">
+            <List items="{ProductsModel>/Products}" mode="SingleSelectMaster" selectionChange="onSelectProduct">
+                <items>
+                    <ObjectListItem title="{ProductsModel>ProductName}"
+                        number="{ parts: [ {path: 'ProductsModel>UnitPrice'}, 
+                                           {path: '/CurrencyCode'} ], type: 'sap.ui.model.type.Currency', 
+                                           formatOptions: { showMeasure: false } }"
+                        numberUnit="{/CurrencyCode}">
+                        <ObjectAttribute text="{ProductsModel>QuantityPerUnit}" />
+                        <ObjectAttribute title="{i18n>currStockValue}"
+                                         text="{ parts: [ 
+                                            {path: 'ProductsModel>UnitPrice'}, 
+                                            {path: 'ProductsModel>UnitsInStock'}, 
+                                            {path: '/CurrencyCode'} ], 
+                                            formatter: '.formatter.formatStockValue' }" />
+                    </ObjectListItem>
+                </items>
+            </List>
+        </Panel>
+        <Panel id="panel4" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" headerText="Product Details">
+            <f:SimpleForm id="ProductDetails">
+                <Label text="ProductID"/>
+                <Input value="{ProductsModel>ProductID}" />
+                <Label text="ProductName"/>
+                <Input value="{ProductsModel>ProductName}" />
+                <Label text="QuantityPerUnit"/>
+                <Input value="{ProductsModel>QuantityPerUnit}" />
+                <Label text="UnitPrice"/>
+                <Input value="{ProductsModel>UnitPrice}" />
+                <Label text="UnitsInStock"/>
+                <Input value="{ProductsModel>UnitsInStock}" />
+                <Label text="Discontinued"/>
+                <Input value="{ProductsModel>Discontinued}" />
+            </f:SimpleForm>
+        </Panel>
+    </Page>
+</mvc:View>

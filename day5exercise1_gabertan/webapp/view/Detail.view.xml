@@ -1,0 +1,6 @@
+<mvc:View controllerName="zbtp.day5exercise1gabertan.controller.Home" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page2" title="Detail Page">
+        <Text id="idNameText" />
+    </Page>
+</mvc:View>
