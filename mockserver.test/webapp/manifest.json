@@ -69,7 +69,7 @@
           "bundleName": "sapips.training.mockserver.test.i18n.i18n"
         }
       },
-      "": {
+      "Products": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {

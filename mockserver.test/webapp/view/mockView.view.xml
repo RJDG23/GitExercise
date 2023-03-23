@@ -2,6 +2,27 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-        <content />
+        <content>
+            <Panel id="panel3" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region"
+            headerText="Aggregation Binding">
+            <List items="{Products>/Products}" mode="SingleSelectMaster" selectionChange="onSelectProduct">
+                <items>
+                    <ObjectListItem title="{Products>ProductName}"
+                        number="{ parts: [ {path: 'Products>UnitPrice'}, 
+                                           {path: '/CurrencyCode'} ], type: 'sap.ui.model.type.Currency', 
+                                           formatOptions: { showMeasure: false } }"
+                        numberUnit="{/CurrencyCode}">
+                        <ObjectAttribute text="{Products>QuantityPerUnit}" />
+                        <ObjectAttribute title="{i18n>currStockValue}"
+                                         text="{ parts: [ 
+                                            {path: 'Products>UnitPrice'}, 
+                                            {path: 'Products>UnitsInStock'}, 
+                                            {path: '/CurrencyCode'} ], 
+                                            formatter: '.formatter.formatStockValue' }" />
+                    </ObjectListItem>
+                </items>
+            </List>
+        </Panel>
+        </content>
     </Page>
 </mvc:View>
