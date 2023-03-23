@@ -1,7 +1,71 @@
 <mvc:View controllerName="sapips.training.employeeapp.controller.EmployeeList"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+    <Page id="pgEmployeeListPage" title="{i18n>title}">
+        <content>
+            <Table id="tbEmployeesTable" inset="false" mode="MultiSelect" class="sapUiResponsiveMargin" width="auto"
+                items="{
+			            path: 'EmployeesList>/Employee',
+                        parameters: {
+                            expand: 'CareerList,ProjectList'
+                                    },
+			            sorter: {
+				            path: 'EmployeeID'
+			                    } 
+                        }">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Employees" level="H2" />
+                        <ToolbarSpacer />
+                        <SearchField ariaLabelledBy="text1" id="maxPrice" liveChange="onFilter">
+                            <layoutData>
+                                <OverflowToolbarLayoutData maxWidth="300px" shrinkable="true"
+                                    priority="NeverOverflow" />
+                            </layoutData>
+                        </SearchField>
+                        <Button id="btnAddEmployee" text="Add" press="onAddEmployee" />
+                        <Button id="btnDeleteEmployee" text="Delete" 
+                                press="onDeleteEmployee" ariaHasPopup="Dialog" />
+                        <ToolbarSpacer />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="12em">
+                        <Text text="{i18n>EID}" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="{i18n>FirstName}" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>LastName}" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>Age}" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>DateHire}" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>CareerLevel}" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>CurrentProject}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle" type="Navigation" press="onDetailView">
+                        <cells>
+                            <Text text="{EmployeesList>EmployeeID}" />
+                            <Text text="{EmployeesList>FirstName}" />
+                            <Text text="{EmployeesList>LastName}" />
+                            <Text text="{EmployeesList>Age}" />
+                            <Text text="{EmployeesList>DateHire}" />
+                            <Text text="{EmployeesList>CareerList/CareerLevel}" />
+                            <Text text="{EmployeesList>ProjectList/ProjectID}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
     </Page>
 </mvc:View>

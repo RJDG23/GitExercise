@@ -13,7 +13,11 @@
   "devDependencies": {
     "@ui5/cli": "^3.0.0",
     "@sap/ux-ui5-tooling": "1",
-    "@sap-ux/ui5-middleware-fe-mockserver": "2"
+    "@sap-ux/ui5-middleware-fe-mockserver": "2",
+    "eslint": "5.16.x", 
+    "@sap/eslint-plugin-ui5-jsdocs": "2.0.x", 
+    "@sapui5/ts-types": "1.92.x"
+
   },
   "scripts": {
     "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#sapipstrainingemployeeapp-display\"",

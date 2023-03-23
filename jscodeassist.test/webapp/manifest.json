@@ -1,7 +1,7 @@
 {
   "_version": "1.49.0",
   "sap.app": {
-    "id": "sapips.training.employeeapp",
+    "id": "sapips.training.jscodeassist.test",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,18 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
       "version": "1.9.2",
-      "toolsId": "91554b16-b543-4279-bf10-88a629b807db"
-    },
-    "dataSources": {
-      "mainService": {
-        "uri": "/v2/northwind/northwind.svc/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      }
+      "toolsId": "e17d85c2-5f62-4b75-af78-d162e65c60ca"
     }
   },
   "sap.ui": {
@@ -66,13 +55,8 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "sapips.training.employeeapp.i18n.i18n"
+          "bundleName": "sapips.training.jscodeassist.test.i18n.i18n"
         }
-      },
-      "EmployeesList": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {}
       }
     },
     "resources": {
@@ -87,54 +71,32 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "sapips.training.employeeapp.view",
+        "viewPath": "sapips.training.jscodeassist.test.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
       },
       "routes": [
         {
-          "name": "RouteEmployeeList",
+          "name": "RouteMyView",
           "pattern": ":?query:",
           "target": [
-            "TargetEmployeeList"
-          ]
-        },
-        {
-          "name": "CreateEmployee",
-          "pattern": "CreateEmployee",
-          "target": [
-            "CreateEmployee"
-          ]
-        },
-        {
-          "name": "ViewEmployee",
-          "pattern": "ViewEmployee",
-          "target": [
-            "ViewEmployee"
+            "TargetMyView"
           ]
         }
       ],
       "targets": {
-        "TargetEmployeeList": {
+        "TargetMyView": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "EmployeeList",
-          "viewName": "EmployeeList"
-        },
-        "CreateEmployee" : {
-          "viewType" : "XML",
-          "viewName" : "CreateEmployee"
-        },
-        "ViewEmployee" : {
-          "viewType" : "XML",
-          "viewName" : "ViewEmployee"
+          "viewId": "MyView",
+          "viewName": "MyView"
         }
       }
     },
     "rootView": {
-      "viewName": "sapips.training.employeeapp.view.App",
+      "viewName": "sapips.training.jscodeassist.test.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

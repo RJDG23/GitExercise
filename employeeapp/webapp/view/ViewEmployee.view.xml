@@ -1,0 +1,22 @@
+<mvc:View controllerName="sapips.training.employeeapp.controller.ViewEmployee" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Page id="page" title="{i18n>title}">
+		<content>
+			<ObjectHeader id="oh1" responsive="true" fullScreenOptimized="true" binding="{/ProductCollection/2}"
+				 intro="This is the Decription" title="This is Product" titleActive="false">
+				<headerContainer>
+					<IconTabBar id="itb1" selectedKey="key3" upperCase="true" class="sapUiResponsiveContentPadding">
+						<items>
+							<IconTabFilter key="info" icon="sap-icon://hint">
+								<Text text="Info content goes here ..." />
+							</IconTabFilter>
+							<IconTabFilter key="people" icon="sap-icon://group">
+								<Text text="People content goes here ..." />
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</headerContainer>
+			</ObjectHeader>
+		</content>
+	</Page>
+</mvc:View>
