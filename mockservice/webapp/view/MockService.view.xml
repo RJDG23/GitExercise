@@ -1,0 +1,24 @@
+<mvc:View controllerName="sapips.training.mockservice.controller.MockService"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Button type="Accept" class="sapUiResponsiveMargin" text="Add Product" press="onPress" />
+            <Panel id="idPanel3" headerText="Aggregation Binding" class="sapUiResponsiveMargin" width="auto">
+                <List items="{Product>/Products}" mode="SingleSelectMaster" selectionChange="onSelectProduct">
+                    <items>
+                        <ObjectListItem title="{Product>ProductName}"
+                            number="{ parts: [ {path: 'Product>UnitPrice'} ], type: '', formatOptions: { showMeasure: false } }"
+                            numberUnit="{Product>QuantityPerUnit}">
+
+                            <ObjectAttribute text="{Product>QuantityPerUnit}" />
+                            <ObjectAttribute title="{i18n>currStockValue}"
+                                text="{ parts: [ {path: 'Product>UnitPrice'}, {path: 'Product>UnitsInStock'} ] }" />
+                        </ObjectListItem>
+                    </items>
+                </List>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
