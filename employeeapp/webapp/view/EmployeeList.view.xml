@@ -1,7 +1,7 @@
 <mvc:View controllerName="sapips.training.employeeapp.controller.EmployeeList"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="pgEmployeeListPage" title="{i18n>title}">
+    xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+    <Page id="pgEmployeeListPage" title="{i18n>title1}">
         <content>
             <Table id="tbEmployeesTable" inset="false" mode="MultiSelect" class="sapUiResponsiveMargin" width="auto"
                 items="{
@@ -14,20 +14,14 @@
 			                    } 
                         }">
                 <headerToolbar>
-                    <OverflowToolbar>
+                    <Toolbar>
                         <Title text="Employees" level="H2" />
                         <ToolbarSpacer />
-                        <SearchField ariaLabelledBy="text1" id="maxPrice" liveChange="onFilter">
-                            <layoutData>
-                                <OverflowToolbarLayoutData maxWidth="300px" shrinkable="true"
-                                    priority="NeverOverflow" />
-                            </layoutData>
-                        </SearchField>
+                        <SearchField liveChange=".onSearch" width="25%"/>
                         <Button id="btnAddEmployee" text="Add" press="onAddEmployee" />
-                        <Button id="btnDeleteEmployee" text="Delete" 
+                        <Button id="btnDeleteEmployee" text="Delete" type="Reject"
                                 press="onDeleteEmployee" ariaHasPopup="Dialog" />
-                        <ToolbarSpacer />
-                    </OverflowToolbar>
+                    </Toolbar>
                 </headerToolbar>
                 <columns>
                     <Column width="12em">
@@ -55,13 +49,19 @@
                 <items>
                     <ColumnListItem vAlign="Middle" type="Navigation" press="onDetailView">
                         <cells>
-                            <Text text="{EmployeesList>EmployeeID}" />
-                            <Text text="{EmployeesList>FirstName}" />
-                            <Text text="{EmployeesList>LastName}" />
-                            <Text text="{EmployeesList>Age}" />
-                            <Text text="{EmployeesList>DateHire}" />
-                            <Text text="{EmployeesList>CareerList/CareerLevel}" />
-                            <Text text="{EmployeesList>ProjectList/ProjectID}" />
+                            <Text text="{EmployeesList>EmployeeID}" wrapping="false" />
+                            <Text text="{EmployeesList>FirstName}" wrapping="false"/>
+                            <Text text="{EmployeesList>LastName}" wrapping="false"/>
+                            <Text text="{EmployeesList>Age}" wrapping="false"/>
+                            <Text text="{ 
+                                    path: 'EmployeesList>DateHire',
+                                    type: 'sap.ui.model.type.DateTime',
+                                    formatOptions: { 
+                                        pattern: 'MMMM dd, yyyy' 
+                                    }  
+                                }" wrapping="false"/>
+                            <Text text="{EmployeesList>CareerList/CareerLevel}" wrapping="false"/>
+                            <Text text="{EmployeesList>ProjectList/ProjectName}" wrapping="false"/>
                         </cells>
                     </ColumnListItem>
                 </items>

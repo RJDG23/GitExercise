@@ -1,46 +1,73 @@
 <mvc:View controllerName="sapips.training.employeeapp.controller.CreateEmployee." xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
-    <Page id="pgCreatePage" title="{i18n>title}">
+    displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f1="sap.ui.layout.form">
+    <Page id="pgCreatePage" title="{i18n>title2}" class="sapUiContentPadding">
         <content>
-            <f:SimpleForm id="sfCreateForm" editable="true" layout="ResponsiveGridLayout"
+            <f1:SimpleForm id="sfCreateEmployeeForm" editable="true" layout="ResponsiveGridLayout"
                 class="sapUiResponsiveMargin" width="auto">
-                <f:toolbar>
-                    <Toolbar id="tlbTitle">
-                        <Title id="fTitle" text="Create Employee Record" level="H4" titleStyle="H4" />
+                <f1:toolbar>
+                    <Toolbar id="tlbTitle1">
+                        <Title id="fTitle1" text="{i18n>EmployeeCreateForm}" level="H4" titleStyle="H4" />
                     </Toolbar>
-                </f:toolbar>
-                <f:content>
-                    <Label id="lEID" text="{i18n>EID}" />
-                    <Input id="iEID" value="" />
+                </f1:toolbar>
+                <f1:content>
                     <Label id="lFirstName" text="{i18n>FirstName}" required="true" />
-                    <Input id="iFirstName" value="" />
+                    <Input id="iFirstName" value="" change="onInputChange"/>
                     <Label id="lLastName" text="{i18n>LastName}" required="true" />
-                    <Input id="iLastName" value="" />
+                    <Input id="iLastName" value="" change="onInputChange"/>
                     <Label id="lAge" text="{i18n>Age}" required="true" />
-                    <Input id="iAge" value="" />
+                    <Input id="iAge" value="" change="onInputChange"/>
                     <Label id="lDateHire" text="{i18n>DateHire}" required="true" />
-                    <DatePicker id="IDateHire" placeholder="Enter Date" change="handleChange"
+                    <DatePicker id="dpDateHire" placeholder="Enter Date" change="onInputChange"
                         class="sapUiSmallMarginBottom" />
                     <Label
                         text="DatePicker with OK button in the footer and initialFocusedDateValue new Date(2017, 5, 13)"
                         labelFor="DP8" />
                     <Label id="lCareerLevel" text="{i18n>CareerLevel}" required="true" />
-                    <ComboBox items="{ path: '/CareerLevel',
-					                   sorter: { path: 'text' } }" 
-                              id="iCareerLevel" >
-                        <core:Item key="{key}" text="{text}" />
+                    <ComboBox items="{
+                                path: 'EmployeesList>/CareerList',
+                                sorter: { path: 'CareerLevel' }
+                            }" 
+                            required="true" 
+                            change="onInputChange"
+                            id="cbCareerLevel" >
+                        <core:Item key="{EmployeesList>CareerID}" text="{EmployeesList>CareerLevel}" />
                     </ComboBox>
                     <Label id="lCurrentProject" text="{i18n>CurrentProject}" required="true" />
-                    <ComboBox items="{ path: '/CurrentProj',
-					                   sorter: { path: 'text' } }"
-                              id="iCurrentProject" >
-                        <core:Item key="{key}" text="{text}" />
+                    <ComboBox items="{
+                                path: 'EmployeesList>/ProjectList',
+                                sorter: { path: 'ProjectName' }
+                            }" 
+                            required="true" 
+                            change="onInputChange"
+                            id="cbCurrentProject" >
+                        <core:Item key="{EmployeesList>ProjectID}" text="{EmployeesList>ProjectName}" />
                     </ComboBox>
-                    
-                </f:content>
-            </f:SimpleForm>
-            <Button id="SaveBtn" text="Save" press="onSave" />
-            <Button id="CancelBtn" text="Cancel" press="onCancel" />
+                </f1:content>
+            </f1:SimpleForm>
+            <!-- <f1:SimpleForm id="sfCreateSkillForm" editable="true" layout="ResponsiveGridLayout"
+                class="sapUiResponsiveMargin" width="auto">
+                <f1:toolbar>
+                    <Toolbar id="tlbTitle2">
+                        <Title id="fTitle2" text="{i18n>SkillCreateForm}" level="H4" titleStyle="H4" />
+                    </Toolbar>
+                </f1:toolbar>
+                <f1:content>
+                    <Label text="{i18n>EID}" />
+                    <Input value="" />
+                    <Label id="lSkillID" text="{i18n>SkillID}" required="true" />
+                    <Input id="iSkillID" value="" />
+                    <Label id="lSkillName" text="{i18n>SkillName}" required="true" />
+                    <Input id="iSkillName" value="" />
+                    <Label id="lProficiency" text="{i18n>Proficiency}" required="true" />
+                    <Input id="iProficiency" value="" />                    
+                </f1:content>
+            </f1:SimpleForm> -->
+            <FlexBox justifyContent="Center">
+                <Button id="SaveBtn" text="Save" press="onSaveCreate" type="Accept"  class="sapUiSmallMarginEnd">
+                </Button>
+                <Button id="CancelBtn" text="Cancel" press="onCancelCreate" type="Reject"  class="sapUiSmallMarginEnd">
+                </Button>
+            </FlexBox>
         </content>
     </Page>
 </mvc:View>

@@ -1,0 +1,63 @@
+<mvc:View controllerName="sapips.training.employeeapp.controller.EditEmployee." xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f1="sap.ui.layout.form">
+    <Page id="pgCreatePage" title="{i18n>title4}" class="sapUiContentPadding">
+        <content>
+            <f1:SimpleForm id="sfEditEmployeeForm" editable="true" layout="ResponsiveGridLayout"
+                class="sapUiResponsiveMargin" width="auto">
+                <f1:toolbar>
+                    <Toolbar id="tlbTitle1">
+                        <Title id="fTitle1" text="{i18n>EmployeeEditForm}" level="H4" titleStyle="H4" />
+                    </Toolbar>
+                </f1:toolbar>
+                <f1:content>
+                    <Label id="lEID" text="{i18n>EID}" />
+                    <Input id="iEID" value="{EmployeeName>/EmployeeID}" />
+                    <Label id="lFirstName" text="{i18n>FirstName}" required="true" />
+                    <Input id="iFirstName" value="{EmployeeName>/FirstName}" />
+                    <Label id="lLastName" text="{i18n>LastName}" required="true" />
+                    <Input id="iLastName" value="{EmployeeName>/LastName}" />
+                    <Label id="lAge" text="{i18n>Age}" required="true" />
+                    <Input id="iAge" value="{EmployeeName>/Age}" />
+                    <Label id="lDateHire" text="{i18n>DateHire}" required="true" />
+                    <DatePicker id="IDateHire" value="{ 
+                                        path: 'EmployeeName>/DateHire',
+                                        type: 'sap.ui.model.type.DateTime',
+                                        formatOptions: { 
+                                            pattern: 'MM/dd/yyyy' 
+                                        }  
+                                    }" 
+                        placeholder="Enter Date" change="handleChange"
+                        class="sapUiSmallMarginBottom" />
+                    <Label id="lCareerLevel" text="{i18n>CareerLevel}" required="true" />
+                    <ComboBox items="{
+                                path: 'EmployeesList>/CareerList',
+                                sorter: { path: 'CareerLevel' }
+                            }" 
+                            required="true" 
+                            change="onInputChange"
+                            id="cbCareerLevel"
+                            selectedKey="{EmployeeName>/CareerLevel}" >
+                        <core:Item key="{EmployeesList>CareerID}" text="{EmployeesList>CareerLevel}" />
+                    </ComboBox>
+                    <Label id="lCurrentProject" text="{i18n>CurrentProject}" required="true" />
+                    <ComboBox items="{
+                                path: 'EmployeesList>/ProjectList',
+                                sorter: { path: 'ProjectName' }
+                            }" 
+                            required="true" 
+                            change="onInputChange"
+                            id="cbCurrentProject" 
+                            selectedKey="{EmployeeName>/CurrentProject}">
+                        <core:Item key="{EmployeesList>ProjectID}" text="{EmployeesList>ProjectName}" />
+                    </ComboBox>
+                </f1:content>
+            </f1:SimpleForm>
+            <FlexBox justifyContent="Center">
+                <Button id="SaveBtn" text="Save" press="onSave" type="Accept"  class="sapUiSmallMarginEnd">
+                </Button>
+                <Button id="CancelBtn" text="Cancel" press="onCancel" type="Reject"  class="sapUiSmallMarginEnd">
+                </Button>
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

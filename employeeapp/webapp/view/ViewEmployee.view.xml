@@ -1,22 +1,91 @@
 <mvc:View controllerName="sapips.training.employeeapp.controller.ViewEmployee" xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Page id="page" title="{i18n>title}">
-		<content>
-			<ObjectHeader id="oh1" responsive="true" fullScreenOptimized="true" binding="{/ProductCollection/2}"
-				 intro="This is the Decription" title="This is Product" titleActive="false">
-				<headerContainer>
-					<IconTabBar id="itb1" selectedKey="key3" upperCase="true" class="sapUiResponsiveContentPadding">
-						<items>
-							<IconTabFilter key="info" icon="sap-icon://hint">
-								<Text text="Info content goes here ..." />
-							</IconTabFilter>
-							<IconTabFilter key="people" icon="sap-icon://group">
-								<Text text="People content goes here ..." />
-							</IconTabFilter>
-						</items>
-					</IconTabBar>
-				</headerContainer>
-			</ObjectHeader>
-		</content>
-	</Page>
+    displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+    <Page id="idEmployeeProfilePage" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <ObjectHeader id="oh1" responsive="true" intro="" title="{EmployeeName>/FullName}" number="" numberUnit=""
+                showMarkers="false" markFlagged="false" markFavorite="false" numberState="Success"
+                backgroundDesign="Translucent">
+                <attributes>
+                    <ObjectAttribute title="Career Level" text="{EmployeeCareer>/CareerLevel}" />
+                </attributes>
+            </ObjectHeader>
+            <IconTabBar id="idIconTabBarEmployeeInfo" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter text="Employee Info" key="info">
+                        <VBox class="sapUiSmallMargin">
+                            <f:SimpleForm id="SimpleFormDisplayEmployeeProfile" editable="false"
+                                layout="ResponsiveGridLayout" title="Employee Info" labelSpanXL="3" labelSpanL="3"
+                                labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+                                emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+                                singleContainerFullSize="false">
+                                <f:content>
+                                    <Label text="{i18n>EID}" />
+                                    <Text text="{EmployeeName>/EmployeeID}" id="tEmployeeID" />
+                                    <Label text="{i18n>FirstName}" />
+                                    <Text text="{EmployeeName>/FirstName}" />
+                                    <Label text="{i18n>LastName}" />
+                                    <Text text="{EmployeeName>/LastName}" />
+                                    <Label text="{i18n>Age}" />
+                                    <Text text="{EmployeeName>/Age}" />
+                                    <Label text="{i18n>DateHire}" />
+                                    <Text text="{ 
+                                        path: 'EmployeeName>/DateHire',
+                                        type: 'sap.ui.model.type.DateTime',
+                                        formatOptions: { 
+                                            pattern: 'MM/dd/yyyy' 
+                                        }  
+                                    }" />
+                                    <Label text="{i18n>CareerLevel}" />
+                                    <Text text="{EmployeeCareer>/CareerLevel}" />
+                                    <Label text="{i18n>CurrentProject}" />
+                                    <Text text="{EmployeeProject>/ProjectName}" />
+                                </f:content>
+                            </f:SimpleForm>
+                        </VBox>
+                    </IconTabFilter>
+                    <IconTabFilter text="Skills" key="skills">
+                        <Table id="idEmployeeSkillTable" growing="true" growingThreshold="10" items="{
+                                path: 'EmployeeSkill>/results',
+                                parameters: {
+                                    expand: 'SkillList,ProficiencyList'
+                                },
+                                sorter: {
+                                    path: 'EmployeeSkillID'
+                                }
+                            }">
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true" visible="false">
+                                    <Text text="SkillID" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text="Skill" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text="Proficiency" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem vAlign="Middle">
+                                    <cells>
+                                        <ObjectIdentifier text="{EmployeeSkill>EmployeeSkillID}" wrapping="false"
+                                            visible="false" />
+                                        <Text text="{EmployeeSkill>SkillList/SkillName}" wrapping="false" />
+                                        <Text text="{EmployeeSkill>ProficiencyList/ProficiencyLevel}"
+                                            wrapping="false" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+        <footer>
+            <Toolbar id="idAddPageToolbar">
+                <ToolbarSpacer id="idAddPageToolbarSpacer" />
+                <Button type="Emphasized" id="idEditBtn" text="Edit" press="onEditEmployee" />
+                <Button type="Transparent" id="idCancelBtn" text="Cancel" press="onNavBack" />
+            </Toolbar>
+        </footer>
+    </Page>
 </mvc:View>

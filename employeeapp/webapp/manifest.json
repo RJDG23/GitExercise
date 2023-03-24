@@ -109,9 +109,16 @@
         },
         {
           "name": "ViewEmployee",
-          "pattern": "ViewEmployee",
+          "pattern": "ViewEmployee/{EmployeeID}",
           "target": [
             "ViewEmployee"
+          ]
+        },
+        {
+          "name": "EditEmployee",
+          "pattern": "EditEmployee/{EmployeeID}",
+          "target": [
+            "EditEmployee"
           ]
         }
       ],
@@ -130,6 +137,10 @@
         "ViewEmployee" : {
           "viewType" : "XML",
           "viewName" : "ViewEmployee"
+        },
+        "EditEmployee" : {
+          "viewType" : "XML",
+          "viewName" : "EditEmployee"
         }
       }
     },
